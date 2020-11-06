@@ -1,5 +1,5 @@
 {
-    "name": "kzykhys/steganography",
+    "name": "wboyz/steganography",
     "description": "Simple implementation of Steganography (Hiding a hidden message within an image)",
     "license": "MIT",
     "keywords": ["steganography"],
