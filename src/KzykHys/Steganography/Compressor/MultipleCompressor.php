@@ -3,7 +3,7 @@
 namespace KzykHys\Steganography\Compressor;
 
 use KzykHys\Steganography\CompressorInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kazuyuki Hayashi
@@ -60,7 +60,7 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'preferred_choice' => null

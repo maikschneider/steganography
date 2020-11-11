@@ -2,7 +2,7 @@
 
 namespace KzykHys\Steganography\Compressor;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kazuyuki Hayashi
@@ -37,7 +37,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'level' => -1

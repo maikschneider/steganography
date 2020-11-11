@@ -2,7 +2,7 @@
 
 namespace KzykHys\Steganography;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kazuyuki Hayashi
@@ -35,10 +35,10 @@ interface EncoderInterface
     /**
      * Configure default options
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return EncoderInterface
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver);
+    public function setDefaultOptions(OptionsResolver $resolver);
 
 } 

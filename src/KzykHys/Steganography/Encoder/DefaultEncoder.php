@@ -4,7 +4,7 @@ namespace KzykHys\Steganography\Encoder;
 
 use KzykHys\Steganography\CompressorInterface;
 use KzykHys\Steganography\EncoderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kazuyuki Hayashi
@@ -46,7 +46,7 @@ class DefaultEncoder implements EncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         return $this;
     }

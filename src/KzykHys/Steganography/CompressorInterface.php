@@ -2,7 +2,7 @@
 
 namespace KzykHys\Steganography;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kazuyuki Hayashi
@@ -29,11 +29,11 @@ interface CompressorInterface
     public function decompress($data);
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return CompressorInterface
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver);
+    public function setDefaultOptions(OptionsResolver $resolver);
 
     /**
      * @return bool
