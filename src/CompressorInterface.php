@@ -29,8 +29,6 @@ interface CompressorInterface
     public function decompress($data);
 
     /**
-     * @param OptionsResolver $resolver
-     *
      * @return CompressorInterface
      */
     public function setDefaultOptions(OptionsResolver $resolver);

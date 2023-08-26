@@ -2,39 +2,27 @@
 
 namespace MaikSchneider\Steganography\Iterator;
 
+use Iterator;
 use MaikSchneider\Steganography\Processor;
 
 /**
  * @author Kazuyuki Hayashi
  */
-class BinaryIterator implements \Iterator
+class BinaryIterator implements Iterator
 {
 
-    /**
-     * @var string
-     */
-    private $string;
+    private readonly string $string;
 
-    /**
-     * @var int
-     */
-    private $index = 0;
+    private int $index = 0;
 
-    /**
-     * @var int
-     */
-    private $length = 0;
+    private readonly int $length;
 
-    /**
-     * @var int
-     */
-    private $count = Processor::BITS_PER_PIXEL;
+    private int $count = Processor::BITS_PER_PIXEL;
 
     /**
      * @param     $string
-     * @param int $count
      */
-    public function __construct($string, $count = Processor::BITS_PER_PIXEL)
+    public function __construct(string $string, int $count = Processor::BITS_PER_PIXEL)
     {
         $this->count  = $count;
         $this->string = sprintf('%048b', strlen($string)) . $string;
@@ -46,7 +34,7 @@ class BinaryIterator implements \Iterator
      *
      * @return mixed Can return any type.
      */
-    public function current()
+    public function current(): mixed
     {
         $part  = substr($this->string, ($this->index * $this->count), $this->count);
         $chars = array_pad(str_split($part), $this->count, 0);
@@ -63,9 +51,9 @@ class BinaryIterator implements \Iterator
      *
      * @return void Any returned value is ignored.
      */
-    public function next()
+    public function next(): void
     {
-        $this->index++;
+        ++$this->index;
     }
 
     /**
@@ -73,7 +61,7 @@ class BinaryIterator implements \Iterator
      *
      * @return mixed scalar on success, or null on failure.
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->index;
     }
@@ -84,7 +72,7 @@ class BinaryIterator implements \Iterator
      * @return boolean The return value will be casted to boolean and then evaluated.
      *       Returns true on success or false on failure.
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->index * $this->count < $this->length;
     }
@@ -94,7 +82,7 @@ class BinaryIterator implements \Iterator
      *
      * @return void Any returned value is ignored.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->index = 0;
     }

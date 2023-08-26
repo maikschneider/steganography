@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class RectIteratorTest extends TestCase
 {
 
-    public function testIterator()
+    public function testIterator(): void
     {
         $iterator = new RectIterator(5, 5);
 

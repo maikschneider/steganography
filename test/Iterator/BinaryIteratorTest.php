@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class BinaryIteratorTest extends TestCase
 {
 
-    public function testIterator()
+    public function testIterator(): void
     {
         $iterator = new BinaryIterator('0011011011');
         $result   = iterator_to_array($iterator);

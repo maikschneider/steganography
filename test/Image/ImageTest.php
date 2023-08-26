@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 class ImageTest extends TestCase
 {
 
-    public function testSize()
+    public function testSize(): void
     {
         $image = new Image(__DIR__ . '/../Resources/img/3.jpg');
         $this->assertEquals(3, $image->getWidth());
         $this->assertEquals(3, $image->getHeight());
     }
 
-    public function testInvalidPath()
+    public function testInvalidPath(): void
     {
         $this->expectException(InvalidArgumentException::class);
         new Image(__DIR__.'/foo.jpg');

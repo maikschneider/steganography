@@ -2,6 +2,7 @@
 
 namespace MaikSchneider\Steganography\Compressor;
 
+use MaikSchneider\Steganography\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -13,7 +14,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function compress($data)
+    public function compress($data): mixed
     {
         return gzcompress($data, $this->options['level']);
     }
@@ -21,7 +22,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function decompress($data)
+    public function decompress($data): string
     {
         return gzuncompress($data);
     }
@@ -29,7 +30,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function isSupported()
+    public function isSupported(): bool
     {
         return function_exists('gzcompress');
     }
@@ -37,7 +38,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): CompressorInterface
     {
         $resolver->setDefaults([
             'level' => -1
@@ -49,7 +50,7 @@ class ZlibCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'zlib';
     }

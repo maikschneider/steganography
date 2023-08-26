@@ -15,13 +15,13 @@ class DefaultEncoder implements EncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function encode($data, CompressorInterface $compressor, array $options = [])
+    public function encode($data, CompressorInterface $compressor, array $options = []): mixed
     {
-        $compressed = base64_encode($compressor->compress($data));
+        $compressed = base64_encode((string) $compressor->compress($data));
         $bin        = '';
         $length     = strlen($compressed);
 
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $bin .= sprintf('%08b', ord($compressed[$i]));
         }
 
@@ -31,7 +31,7 @@ class DefaultEncoder implements EncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function decode($data, CompressorInterface $compressor, array $options = [])
+    public function decode($data, CompressorInterface $compressor, array $options = []): mixed
     {
         $chars  = str_split($data, 8);
         $compressed = '';
@@ -46,7 +46,7 @@ class DefaultEncoder implements EncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): EncoderInterface
     {
         return $this;
     }

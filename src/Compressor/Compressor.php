@@ -11,15 +11,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class Compressor implements CompressorInterface
 {
 
-    /**
-     * @var array
-     */
-    protected $options;
+    protected array $options;
 
     /**
      * Constructor
-     *
-     * @param array $options
      */
     public function __construct(array $options = [])
     {

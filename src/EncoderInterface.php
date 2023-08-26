@@ -14,8 +14,6 @@ interface EncoderInterface
      * Encode a message
      *
      * @param string $data
-     * @param CompressorInterface $compressor
-     * @param array               $options
      *
      * @return mixed
      */
@@ -25,8 +23,6 @@ interface EncoderInterface
      * Decode a message
      *
      * @param string              $data
-     * @param CompressorInterface $compressor
-     * @param array               $options
      *
      * @return mixed
      */
@@ -35,7 +31,6 @@ interface EncoderInterface
     /**
      * Configure default options
      *
-     * @param OptionsResolver $resolver
      *
      * @return EncoderInterface
      */

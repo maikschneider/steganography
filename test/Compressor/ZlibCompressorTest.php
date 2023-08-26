@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 class ZlibCompressorTest extends TestCase
 {
 
-    public function testName()
+    public function testName(): void
     {
         $compressor = new ZlibCompressor();
         $this->assertEquals('zlib', $compressor->getName());
     }
 
-    public function testEncodeAndDecodeWithDefaultLevel()
+    public function testEncodeAndDecodeWithDefaultLevel(): void
     {
         $compressor = new ZlibCompressor();
         $compressed = $compressor->compress('test');
@@ -22,7 +22,7 @@ class ZlibCompressorTest extends TestCase
         $this->assertEquals('test', $compressor->decompress($compressed));
     }
 
-    public function testEncodeAndDecodeWithHigherLevel()
+    public function testEncodeAndDecodeWithHigherLevel(): void
     {
         $compressor = new ZlibCompressor(['level' => 6]);
         $compressed = $compressor->compress('test');

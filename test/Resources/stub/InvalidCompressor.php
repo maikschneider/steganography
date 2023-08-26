@@ -12,10 +12,8 @@ class InvalidCompressor extends Compressor
      * Compress a string
      *
      * @param string $data
-     *
-     * @return mixed
      */
-    public function compress($data)
+    public function compress($data): mixed
     {
         return $data;
     }
@@ -24,35 +22,23 @@ class InvalidCompressor extends Compressor
      * Uncompress a compressed string
      *
      * @param mixed $data
-     *
-     * @return string
      */
-    public function decompress($data)
+    public function decompress($data): string
     {
         return $data;
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     * @return \MaikSchneider\Steganography\CompressorInterface
-     */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): \MaikSchneider\Steganography\CompressorInterface
     {
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSupported()
+    public function isSupported(): bool
     {
         return false;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'invalid';
     }

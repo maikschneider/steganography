@@ -13,11 +13,11 @@ use PHPUnit\Framework\TestCase;
 class ProcessorTest extends TestCase
 {
 
-    public function testCompressor()
+    public function testCompressor(): void
     {
         $processor = new Processor();
         $processor->setCompressor(new ZlibCompressor());
-        $this->assertInstanceOf('MaikSchneider\\Steganography\\CompressorInterface', $processor->getCompressor());
+        $this->assertInstanceOf(\MaikSchneider\Steganography\CompressorInterface::class, $processor->getCompressor());
     }
 
     public function testEncode()
@@ -34,10 +34,9 @@ class ProcessorTest extends TestCase
     }
 
     /**
-     * @param string $expected
      * @depends testEncode
      */
-    public function testDecode(string $expected)
+    public function testDecode(string $expected): void
     {
         $processor = new Processor();
         $message = $processor->decode(__DIR__ . '/Resources/out/koala_out.png');
@@ -45,15 +44,15 @@ class ProcessorTest extends TestCase
         $this->assertEquals($expected, $message);
     }
 
-    public function testEncoder()
+    public function testEncoder(): void
     {
         $processor = new Processor();
         $processor->setEncoder(new \MaikSchneider\Steganography\Encoder\DefaultEncoder());
 
-        $this->assertInstanceOf('MaikSchneider\\Steganography\\EncoderInterface', $processor->getEncoder());
+        $this->assertInstanceOf(\MaikSchneider\Steganography\EncoderInterface::class, $processor->getEncoder());
     }
 
-    public function testInvalidCompressor()
+    public function testInvalidCompressor(): void
     {
         $this->expectException(\RuntimeException::class);
 

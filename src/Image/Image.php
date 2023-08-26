@@ -2,6 +2,11 @@
 
 namespace MaikSchneider\Steganography\Image;
 
+use GdImage;
+use InvalidArgumentException;
+use MultipleIterator;
+use LimitIterator;
+use RuntimeException;
 use MaikSchneider\Steganography\Iterator\BinaryIterator;
 use MaikSchneider\Steganography\Iterator\RectIterator;
 use MaikSchneider\Steganography\Processor;
@@ -12,40 +17,23 @@ use MaikSchneider\Steganography\Processor;
 class Image
 {
 
-    /**
-     * @var string
-     */
-    private $path;
+    private readonly string $path;
+
+    private GdImage|bool|null $image = null;
+
+    private int $width = 0;
+
+    private int $height = 0;
+
+    private int $pixels = 0;
 
     /**
-     * @var resource
+     * @throws InvalidArgumentException
      */
-    private $image;
-
-    /**
-     * @var int
-     */
-    private $width = 0;
-
-    /**
-     * @var int
-     */
-    private $height = 0;
-
-    /**
-     * @var int
-     */
-    private $pixels = 0;
-
-    /**
-     * @param string $path
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function __construct($path)
+    public function __construct(string $path)
     {
         if (!file_exists($path)) {
-            throw new \InvalidArgumentException('File Not Found: ' . $path);
+            throw new InvalidArgumentException('File Not Found: ' . $path);
         }
 
         $this->path = $path;
@@ -54,13 +42,11 @@ class Image
     }
 
     /**
-     * @param BinaryIterator $binary
-     *
      * @return $this
      */
     public function setBinaryString(BinaryIterator $binary)
     {
-        $iterator = new \MultipleIterator(\MultipleIterator::MIT_NEED_ALL|\MultipleIterator::MIT_KEYS_ASSOC);
+        $iterator = new MultipleIterator(MultipleIterator::MIT_NEED_ALL|MultipleIterator::MIT_KEYS_ASSOC);
         $iterator->attachIterator(new RectIterator($this->width, $this->height), 'rect');
         $iterator->attachIterator($binary, 'bin');
 
@@ -71,30 +57,25 @@ class Image
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBinaryString()
+    public function getBinaryString(): string
     {
         $iterator = new RectIterator($this->width, $this->height);
         $length   = '';
         $data     = '';
         $offset   = Processor::LENGTH_BITS / Processor::BITS_PER_PIXEL;
 
-        foreach (new \LimitIterator($iterator, 0, $offset) as $value) {
+        foreach (new LimitIterator($iterator, 0, $offset) as $value) {
             $length .= $this->getPixel($value[0], $value[1]);
         }
 
         $bits   = (int) bindec($length);
         $length = (int) ceil($bits / Processor::BITS_PER_PIXEL);
 
-        foreach (new \LimitIterator($iterator, $offset, $length) as $value) {
+        foreach (new LimitIterator($iterator, $offset, $length) as $value) {
             $data .= $this->getPixel($value[0], $value[1]);
         }
 
-        $data = substr($data, 0, $bits);
-
-        return $data;
+        return substr($data, 0, $bits);
     }
 
     /**
@@ -104,7 +85,7 @@ class Image
      *
      * @return $this
      */
-    public function setPixel($x, $y, $values) {
+    public function setPixel($x, $y, array $values) {
         $rgb = $this->getRGB($x, $y);
 
         foreach ($rgb as $name => $value) {
@@ -121,10 +102,8 @@ class Image
     /**
      * @param $x
      * @param $y
-     *
-     * @return string
      */
-    public function getPixel($x, $y)
+    public function getPixel($x, $y): string
     {
         $result = '';
         $rgb = $this->getRGB($x, $y);
@@ -138,42 +117,28 @@ class Image
 
     /**
      * @param $path
-     *
-     * @return bool
      */
-    public function write($path)
+    public function write($path): bool
     {
         return imagepng($this->image, $path, 0);
     }
 
-    /**
-     * @return bool
-     */
-    public function render()
+    public function render(): bool
     {
         return imagepng($this->image, null, 0);
     }
 
-    /**
-     * @return int
-     */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
 
-    /**
-     * @return int
-     */
-    public function getPixels()
+    public function getPixels(): int
     {
         return $this->pixels;
     }
 
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
@@ -189,7 +154,7 @@ class Image
     }
 
     /**
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return resource
      */
@@ -212,7 +177,7 @@ class Image
                 $this->image = imagecreatefrompng($this->path);
                 break;
             default:
-                throw new \RuntimeException('Unsupport image type ' . $type);
+                throw new RuntimeException('Unsupport image type ' . $type);
         }
 
         imagealphablending($this->image, false);
@@ -221,10 +186,8 @@ class Image
     /**
      * @param $x
      * @param $y
-     *
-     * @return array
      */
-    protected function getRGB($x, $y) {
+    protected function getRGB($x, $y): array {
         $rgb = imagecolorat($this->image, $x, $y);
 
         return [

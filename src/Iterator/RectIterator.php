@@ -2,10 +2,11 @@
 
 namespace MaikSchneider\Steganography\Iterator;
 
+use Iterator;
 /**
  * @author Kazuyuki Hayashi
  */
-class RectIterator implements \Iterator
+class RectIterator implements Iterator
 {
 
     /**
@@ -18,20 +19,11 @@ class RectIterator implements \Iterator
      */
     private $height;
 
-    /**
-     * @var int
-     */
-    private $index = 0;
+    private int $index = 0;
 
-    /**
-     * @var int
-     */
-    private $x = 0;
+    private int $x = 0;
 
-    /**
-     * @var int
-     */
-    private $y = 0;
+    private int $y = 0;
 
     /**
      * @param int $width
@@ -48,7 +40,7 @@ class RectIterator implements \Iterator
      *
      * @return mixed Can return any type.
      */
-    public function current()
+    public function current(): mixed
     {
         return [$this->x, $this->y];
     }
@@ -58,16 +50,16 @@ class RectIterator implements \Iterator
      *
      * @return void Any returned value is ignored.
      */
-    public function next()
+    public function next(): void
     {
         if ($this->x + 1 < $this->width) {
-            $this->x++;
+            ++$this->x;
         } else {
             $this->x = 0;
-            $this->y++;
+            ++$this->y;
         }
 
-        $this->index++;
+        ++$this->index;
     }
 
     /**
@@ -75,7 +67,7 @@ class RectIterator implements \Iterator
      *
      * @return mixed scalar on success, or null on failure.
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->index;
     }
@@ -86,7 +78,7 @@ class RectIterator implements \Iterator
      * @return boolean The return value will be casted to boolean and then evaluated.
      *       Returns true on success or false on failure.
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->x < $this->width && $this->y < $this->height;
     }
@@ -96,7 +88,7 @@ class RectIterator implements \Iterator
      *
      * @return void Any returned value is ignored.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->index = 0;
         $this->x     = 0;

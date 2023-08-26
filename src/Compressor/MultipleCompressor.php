@@ -2,6 +2,7 @@
 
 namespace MaikSchneider\Steganography\Compressor;
 
+use LogicException;
 use MaikSchneider\Steganography\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,7 @@ class MultipleCompressor extends Compressor
     /**
      * @var CompressorInterface[]
      */
-    private $children = [];
+    private array $children = [];
 
     /**
      * @var CompressorInterface
@@ -22,8 +23,6 @@ class MultipleCompressor extends Compressor
     private $selectedCompressor;
 
     /**
-     * @param CompressorInterface $compressor
-     *
      * @return $this
      */
     public function attach(CompressorInterface $compressor)
@@ -36,10 +35,10 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function compress($data)
+    public function compress($data): mixed
     {
         if (!$this->selectCompressor()) {
-            throw new \LogicException('Attach at least 1 compressor');
+            throw new LogicException('Attach at least 1 compressor');
         }
 
         return $this->selectedCompressor->compress($data);
@@ -48,10 +47,10 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function decompress($data)
+    public function decompress($data): string
     {
         if (!$this->selectCompressor()) {
-            throw new \LogicException('Attach at least 1 compressor');
+            throw new LogicException('Attach at least 1 compressor');
         }
 
         return $this->selectedCompressor->decompress($data);
@@ -60,7 +59,7 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): CompressorInterface
     {
         $resolver->setDefaults([
             'preferred_choice' => null
@@ -70,7 +69,7 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function isSupported()
+    public function isSupported(): bool
     {
         return $this->selectCompressor();
     }
@@ -78,15 +77,12 @@ class MultipleCompressor extends Compressor
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'multiple';
     }
 
-    /**
-     * @return bool
-     */
-    protected function selectCompressor()
+    protected function selectCompressor(): bool
     {
         if ($this->selectedCompressor) {
             return true;

@@ -10,14 +10,14 @@ use PHPUnit\Framework\TestCase;
 class MultipleCompressorTest extends TestCase
 {
 
-    public function testName()
+    public function testName(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->attach(new ZlibCompressor());
         $this->assertEquals('multiple', $compressor->getName());
     }
 
-    public function testIsSupported()
+    public function testIsSupported(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->attach(new ZlibCompressor());
@@ -27,10 +27,11 @@ class MultipleCompressorTest extends TestCase
         $this->assertFalse($compressor->isSupported());
     }
 
-    public function testEncodeAndDecode()
+    public function testEncodeAndDecode(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->attach(new ZlibCompressor());
+
         $compressed = $compressor->compress('test');
 
         $this->assertEquals('test', $compressor->decompress($compressed));
@@ -39,7 +40,7 @@ class MultipleCompressorTest extends TestCase
     /**
      * @expectedException LogicException
      */
-    public function testEncodeBeforeAttach()
+    public function testEncodeBeforeAttach(): void
     {
         $this->expectException(\LogicException::class);
 
@@ -50,13 +51,13 @@ class MultipleCompressorTest extends TestCase
     /**
      * @expectedException LogicException
      */
-    public function testDecodeBeforeAttach()
+    public function testDecodeBeforeAttach(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->decompress('test');
     }
 
-    public function testPreferredChoice()
+    public function testPreferredChoice(): void
     {
         require_once __DIR__ . '/../Resources/stub/InvalidCompressor.php';
 
@@ -66,7 +67,7 @@ class MultipleCompressorTest extends TestCase
         $compressor->compress('test');
     }
 
-    public function testInvalidPreferredChoice()
+    public function testInvalidPreferredChoice(): void
     {
         require_once __DIR__ . '/../Resources/stub/InvalidCompressor.php';
 

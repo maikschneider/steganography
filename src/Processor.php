@@ -2,6 +2,8 @@
 
 namespace MaikSchneider\Steganography;
 
+use LogicException;
+use RuntimeException;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Encoder\DefaultEncoder;
 use MaikSchneider\Steganography\Image\Image;
@@ -14,18 +16,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class Processor
 {
 
-    const BITS_PER_PIXEL = 3;
-    const LENGTH_BITS    = 48;
+    final const BITS_PER_PIXEL = 3;
 
-    /**
-     * @var CompressorInterface
-     */
-    private $compressor;
+    final const LENGTH_BITS    = 48;
+
+    private ZlibCompressor|CompressorInterface $compressor;
 
     /**
      * @var EncoderInterface
      */
-    private $encoder;
+    private DefaultEncoder $encoder;
 
     /**
      * Constructor
@@ -39,20 +39,17 @@ class Processor
     /**
      * @param string $file
      * @param string $message
-     * @param array  $options
      *
-     * @throws \LogicException
-     *
-     * @return Image
+     * @throws LogicException
      */
-    public function encode($file, $message, array $options = [])
+    public function encode($file, $message, array $options = []): Image
     {
         $image   = new Image($file);
         $message = $this->encodeMessage($message, $options);
-        $pixels  = ceil(strlen($message) / self::BITS_PER_PIXEL + (self::LENGTH_BITS / self::BITS_PER_PIXEL));
+        $pixels  = ceil(strlen((string) $message) / self::BITS_PER_PIXEL + (self::LENGTH_BITS / self::BITS_PER_PIXEL));
 
         if ($pixels > $image->getPixels()) {
-            throw new \LogicException('Number of pixels is fewer than ' . $pixels);
+            throw new LogicException('Number of pixels is fewer than ' . $pixels);
         }
 
         $image->setBinaryString(new BinaryIterator($message));
@@ -62,7 +59,6 @@ class Processor
 
     /**
      * @param string $file
-     * @param array  $options
      *
      * @return mixed
      */
@@ -75,16 +71,14 @@ class Processor
     }
 
     /**
-     * @param CompressorInterface $compressor
      *
-     * @throws \RuntimeException
-     *
+     * @throws RuntimeException
      * @return $this
      */
     public function setCompressor(CompressorInterface $compressor)
     {
         if (!$compressor->isSupported()) {
-            throw new \RuntimeException('Unsupported type of compressor: ' . $compressor->getName());
+            throw new RuntimeException('Unsupported type of compressor: ' . $compressor->getName());
         }
 
         $this->compressor = $compressor;
@@ -92,10 +86,7 @@ class Processor
         return $this;
     }
 
-    /**
-     * @return CompressorInterface
-     */
-    public function getCompressor()
+    public function getCompressor(): CompressorInterface
     {
         return $this->compressor;
     }
@@ -105,7 +96,7 @@ class Processor
      *
      * @return $this
      */
-    public function setEncoder($encoder)
+    public function setEncoder(DefaultEncoder $encoder)
     {
         $this->encoder = $encoder;
 
@@ -115,14 +106,13 @@ class Processor
     /**
      * @return EncoderInterface
      */
-    public function getEncoder()
+    public function getEncoder(): DefaultEncoder
     {
         return $this->encoder;
     }
 
     /**
      * @param string $message
-     * @param array  $options
      *
      * @return mixed
      */
@@ -137,7 +127,6 @@ class Processor
 
     /**
      * @param string $binary
-     * @param array  $options
      *
      * @return mixed
      */
