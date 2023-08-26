@@ -1,29 +1,20 @@
 Steganography
 =============
 
-[![Latest Unstable Version](https://poser.pugx.org/kzykhys/steganography/v/unstable.png)](https://packagist.org/packages/kzykhys/steganography)
-[![Build Status](https://travis-ci.org/kzykhys/Steganography.png?branch=master)](https://travis-ci.org/kzykhys/Steganography)
-[![Coverage Status](https://coveralls.io/repos/kzykhys/Steganography/badge.png)](https://coveralls.io/r/kzykhys/Steganography)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/28e8157b-8b33-4d52-8eda-986a1bffca1d/mini.png)](https://insight.sensiolabs.com/projects/28e8157b-8b33-4d52-8eda-986a1bffca1d)
+[![Latest Version](https://poser.pugx.org/maikschneider/steganography/v/stable)](https://packagist.org/packages/maikschneider/steganography)
 
 Simple PHP implementation of Steganography (Hiding a hidden message within an image)
 
 Requirements
 ------------
 
-* PHP5.4+
+* PHP8.1+
 
 Installation
 ------------
 
-Update your composer.json and run `composer update`
-
-``` json
-{
-    "require": {
-        "kzykhys/steganography": "dev-master"
-    }
-}
+```
+composer require maikschneider/steganography
 ```
 
 Usage
@@ -34,9 +25,9 @@ Usage
 ``` php
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+use MaikSchneider\Steganography\Processor;
 
-$processor = new MaikSchneider\Steganography\Processor();
+$processor = new Processor();
 $image = $processor->encode('/path/to/image.jpg', 'Message to hide'); // jpg|png|gif
 
 // Save image to file
@@ -51,9 +42,9 @@ $image->render();
 ``` php
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+use MaikSchneider\Steganography\Processor;
 
-$processor = new MaikSchneider\Steganography\Processor();
+$processor = new Processor();
 $message = $processor->decode('/path/to/image.png');
 
 echo $message; // "Message to hide"
