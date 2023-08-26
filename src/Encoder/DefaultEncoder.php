@@ -6,15 +6,9 @@ use MaikSchneider\Steganography\CompressorInterface;
 use MaikSchneider\Steganography\EncoderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kazuyuki Hayashi
- */
 class DefaultEncoder implements EncoderInterface
 {
 
-    /**
-     * {@inheritdoc}
-     */
     public function encode($data, CompressorInterface $compressor, array $options = []): mixed
     {
         $compressed = base64_encode((string) $compressor->compress($data));
@@ -28,12 +22,9 @@ class DefaultEncoder implements EncoderInterface
         return $bin;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function decode($data, CompressorInterface $compressor, array $options = []): mixed
+    public function decode($data, CompressorInterface $compressor, array $options = []): string
     {
-        $chars  = str_split($data, 8);
+        $chars  = str_split((string) $data, 8);
         $compressed = '';
 
         foreach ($chars as $char) {
@@ -43,10 +34,7 @@ class DefaultEncoder implements EncoderInterface
         return $compressor->decompress(base64_decode($compressed));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolver $resolver): EncoderInterface
+    public function setDefaultOptions(OptionsResolver $resolver): self
     {
         return $this;
     }

@@ -4,36 +4,13 @@ namespace MaikSchneider\Steganography;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kazuyuki Hayashi
- */
 interface EncoderInterface
 {
 
-    /**
-     * Encode a message
-     *
-     * @param string $data
-     *
-     * @return mixed
-     */
-    public function encode($data, CompressorInterface $compressor, array $options = []);
+    public function encode(string $data, CompressorInterface $compressor, array $options = []): mixed;
 
-    /**
-     * Decode a message
-     *
-     * @param string              $data
-     *
-     * @return mixed
-     */
-    public function decode($data, CompressorInterface $compressor, array $options = []);
+    public function decode(string $data, CompressorInterface $compressor, array $options = []): mixed;
 
-    /**
-     * Configure default options
-     *
-     *
-     * @return EncoderInterface
-     */
-    public function setDefaultOptions(OptionsResolver $resolver);
+    public function setDefaultOptions(OptionsResolver $resolver): EncoderInterface;
 
 } 

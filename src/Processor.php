@@ -10,9 +10,6 @@ use MaikSchneider\Steganography\Image\Image;
 use MaikSchneider\Steganography\Iterator\BinaryIterator;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kazuyuki Hayashi
- */
 class Processor
 {
 
@@ -22,14 +19,8 @@ class Processor
 
     private ZlibCompressor|CompressorInterface $compressor;
 
-    /**
-     * @var EncoderInterface
-     */
-    private DefaultEncoder $encoder;
+    private EncoderInterface $encoder;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->encoder    = new DefaultEncoder();
@@ -37,12 +28,9 @@ class Processor
     }
 
     /**
-     * @param string $file
-     * @param string $message
-     *
      * @throws LogicException
      */
-    public function encode($file, $message, array $options = []): Image
+    public function encode(string $file, string $message, array $options = []): Image
     {
         $image   = new Image($file);
         $message = $this->encodeMessage($message, $options);
@@ -57,12 +45,7 @@ class Processor
         return $image;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return mixed
-     */
-    public function decode($file, array $options = [])
+    public function decode(string $file, array $options = []): mixed
     {
         $image  = new Image($file);
         $binary = $image->getBinaryString();
@@ -71,19 +54,15 @@ class Processor
     }
 
     /**
-     *
      * @throws RuntimeException
-     * @return $this
      */
-    public function setCompressor(CompressorInterface $compressor)
+    public function setCompressor(CompressorInterface $compressor): void
     {
         if (!$compressor->isSupported()) {
             throw new RuntimeException('Unsupported type of compressor: ' . $compressor->getName());
         }
 
         $this->compressor = $compressor;
-
-        return $this;
     }
 
     public function getCompressor(): CompressorInterface
@@ -91,32 +70,17 @@ class Processor
         return $this->compressor;
     }
 
-    /**
-     * @param EncoderInterface $encoder
-     *
-     * @return $this
-     */
-    public function setEncoder(DefaultEncoder $encoder)
+    public function setEncoder(EncoderInterface $encoder): void
     {
         $this->encoder = $encoder;
-
-        return $this;
     }
 
-    /**
-     * @return EncoderInterface
-     */
-    public function getEncoder(): DefaultEncoder
+    public function getEncoder(): EncoderInterface
     {
         return $this->encoder;
     }
 
-    /**
-     * @param string $message
-     *
-     * @return mixed
-     */
-    protected function encodeMessage($message, array $options = [])
+    protected function encodeMessage(string $message, array $options = []): mixed
     {
         $resolver = new OptionsResolver();
         $this->encoder->setDefaultOptions($resolver);
@@ -125,12 +89,7 @@ class Processor
         return $this->encoder->encode($message, $this->compressor, $options);
     }
 
-    /**
-     * @param string $binary
-     *
-     * @return mixed
-     */
-    protected function decodeMessage($binary, array $options = [])
+    protected function decodeMessage(string $binary, array $options = []): mixed
     {
         $resolver = new OptionsResolver();
         $this->encoder->setDefaultOptions($resolver);

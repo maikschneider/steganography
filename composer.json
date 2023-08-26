@@ -11,7 +11,9 @@
         }
     ],
     "require": {
-        "symfony/options-resolver": "^4.0 || ^5.0"
+        "symfony/options-resolver": "^4.0 || ^5.0",
+        "ext-zlib": "*",
+        "ext-gd": "*"
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.0",

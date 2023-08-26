@@ -19,9 +19,6 @@ class BinaryIterator implements Iterator
 
     private int $count = Processor::BITS_PER_PIXEL;
 
-    /**
-     * @param     $string
-     */
     public function __construct(string $string, int $count = Processor::BITS_PER_PIXEL)
     {
         $this->count  = $count;
@@ -32,9 +29,9 @@ class BinaryIterator implements Iterator
     /**
      * Return the current element
      *
-     * @return mixed Can return any type.
+     * @return array Can return any type.
      */
-    public function current(): mixed
+    public function current(): array
     {
         $part  = substr($this->string, ($this->index * $this->count), $this->count);
         $chars = array_pad(str_split($part), $this->count, 0);
@@ -48,8 +45,6 @@ class BinaryIterator implements Iterator
 
     /**
      * Move forward to next element
-     *
-     * @return void Any returned value is ignored.
      */
     public function next(): void
     {
@@ -59,9 +54,9 @@ class BinaryIterator implements Iterator
     /**
      * Return the key of the current element
      *
-     * @return mixed scalar on success, or null on failure.
+     * @return int scalar on success, or null on failure.
      */
-    public function key(): mixed
+    public function key(): int
     {
         return $this->index;
     }

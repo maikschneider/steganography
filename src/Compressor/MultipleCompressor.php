@@ -6,9 +6,6 @@ use LogicException;
 use MaikSchneider\Steganography\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kazuyuki Hayashi
- */
 class MultipleCompressor extends Compressor
 {
 
@@ -17,24 +14,13 @@ class MultipleCompressor extends Compressor
      */
     private array $children = [];
 
-    /**
-     * @var CompressorInterface
-     */
-    private $selectedCompressor;
+    private ?CompressorInterface $selectedCompressor = null;
 
-    /**
-     * @return $this
-     */
-    public function attach(CompressorInterface $compressor)
+    public function attach(CompressorInterface $compressor): void
     {
         $this->children[$compressor->getName()] = $compressor;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function compress($data): mixed
     {
         if (!$this->selectCompressor()) {
@@ -44,9 +30,6 @@ class MultipleCompressor extends Compressor
         return $this->selectedCompressor->compress($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function decompress($data): string
     {
         if (!$this->selectCompressor()) {
@@ -56,27 +39,18 @@ class MultipleCompressor extends Compressor
         return $this->selectedCompressor->decompress($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolver $resolver): CompressorInterface
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'preferred_choice' => null
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isSupported(): bool
     {
         return $this->selectCompressor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'multiple';
@@ -84,7 +58,7 @@ class MultipleCompressor extends Compressor
 
     protected function selectCompressor(): bool
     {
-        if ($this->selectedCompressor) {
+        if ($this->selectedCompressor instanceof CompressorInterface) {
             return true;
         }
 

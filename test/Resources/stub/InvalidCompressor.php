@@ -8,29 +8,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class InvalidCompressor extends Compressor
 {
 
-    /**
-     * Compress a string
-     *
-     * @param string $data
-     */
-    public function compress($data): mixed
+    public function compress(string $data): mixed
     {
         return $data;
     }
 
-    /**
-     * Uncompress a compressed string
-     *
-     * @param mixed $data
-     */
     public function decompress($data): string
     {
         return $data;
     }
 
-    public function setDefaultOptions(OptionsResolver $resolver): \MaikSchneider\Steganography\CompressorInterface
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
-        return $this;
     }
 
     public function isSupported(): bool

@@ -4,43 +4,17 @@ namespace MaikSchneider\Steganography;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kazuyuki Hayashi
- */
 interface CompressorInterface
 {
 
-    /**
-     * Compress a string
-     *
-     * @param string $data
-     *
-     * @return mixed
-     */
-    public function compress($data);
+    public function compress(string $data): mixed;
 
-    /**
-     * Uncompress a compressed string
-     *
-     * @param mixed $data
-     *
-     * @return string
-     */
-    public function decompress($data);
+    public function decompress(mixed $data): string;
 
-    /**
-     * @return CompressorInterface
-     */
-    public function setDefaultOptions(OptionsResolver $resolver);
+    public function setDefaultOptions(OptionsResolver $resolver): void;
 
-    /**
-     * @return bool
-     */
-    public function isSupported();
+    public function isSupported(): bool;
 
-    /**
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
 
 } 

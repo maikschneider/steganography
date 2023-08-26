@@ -2,6 +2,7 @@
 
 namespace MaikSchneider\Steganography\Test\Compressor;
 
+use LogicException;
 use MaikSchneider\Steganography\Compressor\MultipleCompressor;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Test\Resources\stub\InvalidCompressor;
@@ -37,44 +38,40 @@ class MultipleCompressorTest extends TestCase
         $this->assertEquals('test', $compressor->decompress($compressed));
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testEncodeBeforeAttach(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
 
         $compressor = new MultipleCompressor();
         $compressor->compress('test');
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testDecodeBeforeAttach(): void
     {
+        $this->expectException(LogicException::class);
         $compressor = new MultipleCompressor();
         $compressor->decompress('test');
     }
 
     public function testPreferredChoice(): void
     {
-        require_once __DIR__ . '/../Resources/stub/InvalidCompressor.php';
-
-        $compressor = new MultipleCompressor(['preferred_choice' => 'zlib']);
-        $compressor->attach(new ZlibCompressor());
+        $compressor = new MultipleCompressor();
         $compressor->attach(new InvalidCompressor());
-        $compressor->compress('test');
+        $compressor->attach(new ZlibCompressor());
+        $data = $compressor->compress('test');
+
+        $this->assertEquals('test', $compressor->decompress($data));
     }
 
     public function testInvalidPreferredChoice(): void
     {
-        require_once __DIR__ . '/../Resources/stub/InvalidCompressor.php';
-
         $compressor = new MultipleCompressor(['preferred_choice' => 'invalid']);
         $compressor->attach(new ZlibCompressor());
         $compressor->attach(new InvalidCompressor());
         $compressor->compress('test');
+        $data = $compressor->compress('test');
+
+        $this->assertEquals('test', $compressor->decompress($data));
     }
 
 } 
