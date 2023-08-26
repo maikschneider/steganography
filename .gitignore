@@ -1,4 +1,4 @@
 .idea/
 /vendor/
-/test/KzykHys/Steganography/Resources/out/*
-composer.phar
+/test/Resources/out/*
+.phpunit*
