@@ -3,7 +3,7 @@
  * @author Kazuyuki Hayashi
  */
 
-use KzykHys\Steganography\Iterator\RectIterator;
+use MaikSchneider\Steganography\Iterator\RectIterator;
 
 class RectIteratorTest extends \PHPUnit_Framework_TestCase
 {

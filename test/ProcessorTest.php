@@ -1,8 +1,8 @@
 <?php
 
-use KzykHys\Steganography\Compressor\ZlibCompressor;
-use KzykHys\Steganography\Image;
-use KzykHys\Steganography\Processor;
+use MaikSchneider\Steganography\Compressor\ZlibCompressor;
+use MaikSchneider\Steganography\Image;
+use MaikSchneider\Steganography\Processor;
 
 class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,7 +40,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     public function testEncoder()
     {
         $processor = new Processor();
-        $processor->setEncoder(new \KzykHys\Steganography\Encoder\DefaultEncoder());
+        $processor->setEncoder(new \MaikSchneider\Steganography\Encoder\DefaultEncoder());
 
         $this->assertInstanceOf('KzykHys\\Steganography\\EncoderInterface', $processor->getEncoder());
     }

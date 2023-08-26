@@ -1,6 +1,6 @@
 <?php
 
-use KzykHys\Steganography\Compressor\Compressor;
+use MaikSchneider\Steganography\Compressor\Compressor;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InvalidCompressor extends Compressor
@@ -32,8 +32,7 @@ class InvalidCompressor extends Compressor
 
     /**
      * @param OptionsResolver $resolver
-     *
-     * @return \KzykHys\Steganography\CompressorInterface
+     * @return \MaikSchneider\Steganography\CompressorInterface
      */
     public function setDefaultOptions(OptionsResolver $resolver)
     {

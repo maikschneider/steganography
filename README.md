@@ -36,7 +36,7 @@ Usage
 
 require __DIR__ . '/vendor/autoload.php';
 
-$processor = new KzykHys\Steganography\Processor();
+$processor = new MaikSchneider\Steganography\Processor();
 $image = $processor->encode('/path/to/image.jpg', 'Message to hide'); // jpg|png|gif
 
 // Save image to file
@@ -53,7 +53,7 @@ $image->render();
 
 require __DIR__ . '/vendor/autoload.php';
 
-$processor = new KzykHys\Steganography\Processor();
+$processor = new MaikSchneider\Steganography\Processor();
 $message = $processor->decode('/path/to/image.png');
 
 echo $message; // "Message to hide"

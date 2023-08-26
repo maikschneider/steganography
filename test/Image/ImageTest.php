@@ -1,5 +1,5 @@
 <?php
-use KzykHys\Steganography\Image\Image;
+use MaikSchneider\Steganography\Image\Image;
 
 /**
  * @author Kazuyuki Hayashi

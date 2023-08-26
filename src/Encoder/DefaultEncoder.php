@@ -1,9 +1,9 @@
 <?php
 
-namespace KzykHys\Steganography\Encoder;
+namespace MaikSchneider\Steganography\Encoder;
 
-use KzykHys\Steganography\CompressorInterface;
-use KzykHys\Steganography\EncoderInterface;
+use MaikSchneider\Steganography\CompressorInterface;
+use MaikSchneider\Steganography\EncoderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

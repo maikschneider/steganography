@@ -1,6 +1,6 @@
 <?php
 
-namespace KzykHys\Steganography\Iterator;
+namespace MaikSchneider\Steganography\Iterator;
 
 /**
  * @author Kazuyuki Hayashi

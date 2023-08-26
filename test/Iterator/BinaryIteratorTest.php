@@ -1,6 +1,6 @@
 <?php
 
-use KzykHys\Steganography\Iterator\BinaryIterator;
+use MaikSchneider\Steganography\Iterator\BinaryIterator;
 
 class BinaryIteratorTest extends PHPUnit_Framework_TestCase
 {

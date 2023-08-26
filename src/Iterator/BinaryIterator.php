@@ -1,8 +1,8 @@
 <?php
 
-namespace KzykHys\Steganography\Iterator;
+namespace MaikSchneider\Steganography\Iterator;
 
-use KzykHys\Steganography\Processor;
+use MaikSchneider\Steganography\Processor;
 
 /**
  * @author Kazuyuki Hayashi

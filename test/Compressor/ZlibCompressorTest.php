@@ -1,5 +1,5 @@
 <?php
-use KzykHys\Steganography\Compressor\ZlibCompressor;
+use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 
 /**
  * @author Kazuyuki Hayashi

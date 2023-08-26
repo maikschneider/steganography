@@ -1,11 +1,11 @@
 <?php
 
-namespace KzykHys\Steganography;
+namespace MaikSchneider\Steganography;
 
-use KzykHys\Steganography\Compressor\ZlibCompressor;
-use KzykHys\Steganography\Encoder\DefaultEncoder;
-use KzykHys\Steganography\Image\Image;
-use KzykHys\Steganography\Iterator\BinaryIterator;
+use MaikSchneider\Steganography\Compressor\ZlibCompressor;
+use MaikSchneider\Steganography\Encoder\DefaultEncoder;
+use MaikSchneider\Steganography\Image\Image;
+use MaikSchneider\Steganography\Iterator\BinaryIterator;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

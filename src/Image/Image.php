@@ -1,10 +1,10 @@
 <?php
 
-namespace KzykHys\Steganography\Image;
+namespace MaikSchneider\Steganography\Image;
 
-use KzykHys\Steganography\Iterator\BinaryIterator;
-use KzykHys\Steganography\Iterator\RectIterator;
-use KzykHys\Steganography\Processor;
+use MaikSchneider\Steganography\Iterator\BinaryIterator;
+use MaikSchneider\Steganography\Iterator\RectIterator;
+use MaikSchneider\Steganography\Processor;
 
 /**
  * @author Kazuyuki Hayashi

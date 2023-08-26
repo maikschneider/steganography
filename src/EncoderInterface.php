@@ -1,6 +1,6 @@
 <?php
 
-namespace KzykHys\Steganography;
+namespace MaikSchneider\Steganography;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
