@@ -4,6 +4,7 @@ namespace MaikSchneider\Steganography\Test\Compressor;
 
 use MaikSchneider\Steganography\Compressor\MultipleCompressor;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
+use MaikSchneider\Steganography\Test\Resources\stub\InvalidCompressor;
 use PHPUnit\Framework\TestCase;
 
 class MultipleCompressorTest extends TestCase
@@ -40,6 +41,8 @@ class MultipleCompressorTest extends TestCase
      */
     public function testEncodeBeforeAttach()
     {
+        $this->expectException(\LogicException::class);
+
         $compressor = new MultipleCompressor();
         $compressor->compress('test');
     }

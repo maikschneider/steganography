@@ -7,6 +7,7 @@ namespace MaikSchneider\Steganography\Test;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Image;
 use MaikSchneider\Steganography\Processor;
+use MaikSchneider\Steganography\Test\Resources\stub\InvalidCompressor;
 use PHPUnit\Framework\TestCase;
 
 class ProcessorTest extends TestCase
@@ -16,7 +17,7 @@ class ProcessorTest extends TestCase
     {
         $processor = new Processor();
         $processor->setCompressor(new ZlibCompressor());
-        $this->assertInstanceOf('KzykHys\\Steganography\\CompressorInterface', $processor->getCompressor());
+        $this->assertInstanceOf('MaikSchneider\\Steganography\\CompressorInterface', $processor->getCompressor());
     }
 
     public function testEncode()
@@ -27,6 +28,8 @@ class ProcessorTest extends TestCase
         $image = $processor->encode(__DIR__ . '/Resources/img/koala.jpg', $message);
         $image->write(__DIR__ . '/Resources/out/koala_out.png');
 
+        $this->assertFileExists(__DIR__ . '/Resources/out/koala_out.png');
+
         return $message;
     }
 
@@ -34,7 +37,7 @@ class ProcessorTest extends TestCase
      * @param string $expected
      * @depends testEncode
      */
-    public function testDecode($expected)
+    public function testDecode(string $expected)
     {
         $processor = new Processor();
         $message = $processor->decode(__DIR__ . '/Resources/out/koala_out.png');
@@ -47,15 +50,12 @@ class ProcessorTest extends TestCase
         $processor = new Processor();
         $processor->setEncoder(new \MaikSchneider\Steganography\Encoder\DefaultEncoder());
 
-        $this->assertInstanceOf('KzykHys\\Steganography\\EncoderInterface', $processor->getEncoder());
+        $this->assertInstanceOf('MaikSchneider\\Steganography\\EncoderInterface', $processor->getEncoder());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testInvalidCompressor()
     {
-        require_once __DIR__ . '/Resources/stub/InvalidCompressor.php';
+        $this->expectException(\RuntimeException::class);
 
         $processor = new Processor();
         $processor->setCompressor(new InvalidCompressor());
