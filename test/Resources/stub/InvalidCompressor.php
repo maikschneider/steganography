@@ -1,5 +1,7 @@
 <?php
 
+namespace MaikSchneider\Steganography\Test;
+
 use MaikSchneider\Steganography\Compressor\Compressor;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

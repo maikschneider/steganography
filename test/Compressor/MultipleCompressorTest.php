@@ -1,12 +1,12 @@
 <?php
+
+namespace MaikSchneider\Steganography\Test\Compressor;
+
 use MaikSchneider\Steganography\Compressor\MultipleCompressor;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Kazuyuki Hayashi
- */
-
-class MultipleCompressorTest extends \PHPUnit_Framework_TestCase
+class MultipleCompressorTest extends TestCase
 {
 
     public function testName()

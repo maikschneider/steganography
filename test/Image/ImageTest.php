@@ -1,11 +1,12 @@
 <?php
+
+namespace MaikSchneider\Steganography\Test\Image;
+
+use InvalidArgumentException;
 use MaikSchneider\Steganography\Image\Image;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Kazuyuki Hayashi
- */
-
-class ImageTest extends \PHPUnit_Framework_TestCase
+class ImageTest extends TestCase
 {
 
     public function testSize()
@@ -15,12 +16,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $image->getHeight());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testInvalidPath()
     {
-        $image = new Image(__DIR__.'/foo.jpg');
+        $this->expectException(InvalidArgumentException::class);
+        new Image(__DIR__.'/foo.jpg');
     }
 
 } 

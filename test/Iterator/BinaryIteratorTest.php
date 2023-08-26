@@ -1,8 +1,11 @@
 <?php
 
-use MaikSchneider\Steganography\Iterator\BinaryIterator;
+namespace MaikSchneider\Steganography\Test\Iterator;
 
-class BinaryIteratorTest extends PHPUnit_Framework_TestCase
+use MaikSchneider\Steganography\Iterator\BinaryIterator;
+use PHPUnit\Framework\TestCase;
+
+class BinaryIteratorTest extends TestCase
 {
 
     public function testIterator()

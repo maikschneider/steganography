@@ -1,11 +1,11 @@
 <?php
-/**
- * @author Kazuyuki Hayashi
- */
+
+namespace MaikSchneider\Steganography\Test\Iterator;
 
 use MaikSchneider\Steganography\Iterator\RectIterator;
+use PHPUnit\Framework\TestCase;
 
-class RectIteratorTest extends \PHPUnit_Framework_TestCase
+class RectIteratorTest extends TestCase
 {
 
     public function testIterator()

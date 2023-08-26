@@ -1,10 +1,15 @@
 <?php
 
+namespace MaikSchneider\Steganography\Test;
+
+namespace MaikSchneider\Steganography\Test;
+
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Image;
 use MaikSchneider\Steganography\Processor;
+use PHPUnit\Framework\TestCase;
 
-class ProcessorTest extends \PHPUnit_Framework_TestCase
+class ProcessorTest extends TestCase
 {
 
     public function testCompressor()

@@ -1,11 +1,11 @@
 <?php
+
+namespace MaikSchneider\Steganography\Test\Compressor;
+
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Kazuyuki Hayashi
- */
-
-class ZlibCompressorTest extends \PHPUnit_Framework_TestCase
+class ZlibCompressorTest extends TestCase
 {
 
     public function testName()
