@@ -32,7 +32,7 @@
         }
     },
     "scripts": {
-        "test:phpunit": "vendor/bin/phpunit -c phpunit.xml.dist",
+        "test:phpunit": "vendor/bin/phpunit -c phpunit.xml.dist --coverage-text",
         "test:coverage": "vendor/bin/coveralls",
         "php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix"
     }
