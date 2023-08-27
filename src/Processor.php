@@ -2,6 +2,7 @@
 
 namespace MaikSchneider\Steganography;
 
+use GdImage;
 use LogicException;
 use MaikSchneider\Steganography\Compressor\CompressorInterface;
 use MaikSchneider\Steganography\Encoder\EncoderInterface;
@@ -30,11 +31,21 @@ class Processor
     }
 
     /**
+     * @param GdImage|string $file
+     * @param array<string, mixed> $options
      * @throws LogicException
      */
-    public function encode(string $file, string $message, array $options = []): Image
+    public function encode(GdImage|string $file, string $message, array $options = []): Image
     {
-        $image   = new Image($file);
+        if (is_string($file)) {
+            $image = Image::getFromFilePath($file);
+        }
+        elseif (is_object($file) && get_class($file) === GdImage::class) {
+            $image = Image::getFromResource($file);
+        } else {
+            throw new \InvalidArgumentException('Type of argument "file" not supported. Musst be path or resource.');
+        }
+
         $message = $this->encodeMessage($message, $options);
         $pixels  = ceil(strlen((string) $message) / self::BITS_PER_PIXEL + (self::LENGTH_BITS / self::BITS_PER_PIXEL));
 

@@ -11,10 +11,10 @@ use MaikSchneider\Steganography\Iterator\BinaryIterator;
 use MaikSchneider\Steganography\Iterator\RectIterator;
 use MaikSchneider\Steganography\Processor;
 
-class Image
+final class Image
 {
 
-    private readonly string $path;
+    private string $path;
 
     private GdImage|bool|null $image = null;
 
@@ -27,21 +27,35 @@ class Image
     /**
      * @throws InvalidArgumentException
      */
-    public function __construct(string $path)
+    public static function getFromFilePath(string $path): Image
     {
         if (!file_exists($path)) {
             throw new InvalidArgumentException('File Not Found: ' . $path);
         }
 
-        $this->path = $path;
+        $image = new Image();
+        $image->path = $path;
+        $image->initializeImage();
 
-        $this->initialize();
+        return $image;
+    }
+
+    /**
+     * @param GdImage $resource
+     */
+    public static function getFromResource(mixed $resource): Image
+    {
+        $image = new Image();
+        $image->image = $resource;
+        $image->initializeInfo();
+
+        return $image;
     }
 
     /**
      * @throws RuntimeException
      */
-    protected function initialize(): void
+    protected function initializeImage(): void
     {
         $info = getimagesize($this->path);
         $this->width = $info[0];
@@ -63,6 +77,14 @@ class Image
                 throw new RuntimeException('Unsupport image type ' . $type);
         }
 
+        imagealphablending($this->image, false);
+    }
+
+    protected function initializeInfo(): void
+    {
+        $this->width = imagesx($this->image);
+        $this->height = imagesy($this->image);
+        $this->pixels = $this->width * $this->height;
         imagealphablending($this->image, false);
     }
 
@@ -168,6 +190,14 @@ class Image
         if ($this->image) {
             imagedestroy($this->image);
         }
+    }
+
+    public function get()
+    {
+        ob_start();
+        imagepng($this->image);
+
+        return ob_get_clean();
     }
 
 } 
