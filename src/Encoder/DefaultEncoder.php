@@ -7,10 +7,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DefaultEncoder implements EncoderInterface
 {
-
     public function encode($data, CompressorInterface $compressor, array $options = []): string
     {
-        $compressed = base64_encode((string) $compressor->compress($data));
+        $compressed = base64_encode((string)$compressor->compress($data));
         $bin        = '';
         $length     = strlen($compressed);
 
@@ -23,7 +22,7 @@ class DefaultEncoder implements EncoderInterface
 
     public function decode($data, CompressorInterface $compressor, array $options = []): string
     {
-        $chars  = str_split((string) $data, 8);
+        $chars  = str_split((string)$data, 8);
         $compressed = '';
 
         foreach ($chars as $char) {
@@ -37,5 +36,4 @@ class DefaultEncoder implements EncoderInterface
     {
         return $this;
     }
-
 }

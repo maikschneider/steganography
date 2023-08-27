@@ -19,7 +19,8 @@
         "php-coveralls/php-coveralls": "^2.0",
         "phpunit/phpunit": "^10.3",
         "sensiolabs/security-checker": "dev-master",
-        "rector/rector": "^0.18.0"
+        "rector/rector": "^0.18.0",
+        "friendsofphp/php-cs-fixer": "^3.12"
     },
     "autoload": {
         "psr-4": {
@@ -33,6 +34,7 @@
     },
     "scripts": {
         "test:phpunit": "vendor/bin/phpunit -c phpunit.xml.dist",
-        "test:coverage": "vendor/bin/coveralls"
+        "test:coverage": "vendor/bin/coveralls",
+        "php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix"
     }
 }

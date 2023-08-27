@@ -7,7 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MultipleCompressor extends Compressor
 {
-
     /**
      * @var CompressorInterface[]
      */
@@ -41,7 +40,7 @@ class MultipleCompressor extends Compressor
     public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'preferred_choice' => null
+            'preferred_choice' => null,
         ]);
     }
 
@@ -79,5 +78,4 @@ class MultipleCompressor extends Compressor
 
         return false;
     }
-
 }

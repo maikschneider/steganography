@@ -2,8 +2,6 @@
 
 namespace MaikSchneider\Steganography\Test;
 
-namespace MaikSchneider\Steganography\Test;
-
 use MaikSchneider\Steganography\Compressor\CompressorInterface;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Encoder\DefaultEncoder;
@@ -14,12 +12,11 @@ use PHPUnit\Framework\TestCase;
 
 class ProcessorTest extends TestCase
 {
-
     public function testCompressor(): void
     {
         $processor = new Processor();
         $processor->setCompressor(new ZlibCompressor());
-        $this->assertInstanceOf(CompressorInterface::class, $processor->getCompressor());
+        self::assertInstanceOf(CompressorInterface::class, $processor->getCompressor());
     }
 
     public function testEncode()
@@ -30,7 +27,7 @@ class ProcessorTest extends TestCase
         $image = $processor->encode(__DIR__ . '/Resources/img/koala.jpg', $message);
         $image->write(__DIR__ . '/Resources/out/koala_out.png');
 
-        $this->assertFileExists(__DIR__ . '/Resources/out/koala_out.png');
+        self::assertFileExists(__DIR__ . '/Resources/out/koala_out.png');
 
         return $message;
     }
@@ -43,7 +40,7 @@ class ProcessorTest extends TestCase
         $processor = new Processor();
         $message = $processor->decode(__DIR__ . '/Resources/out/koala_out.png');
 
-        $this->assertEquals($expected, $message);
+        self::assertEquals($expected, $message);
     }
 
     public function testEncoder(): void
@@ -51,7 +48,7 @@ class ProcessorTest extends TestCase
         $processor = new Processor();
         $processor->setEncoder(new DefaultEncoder());
 
-        $this->assertInstanceOf(EncoderInterface::class, $processor->getEncoder());
+        self::assertInstanceOf(EncoderInterface::class, $processor->getEncoder());
     }
 
     public function testInvalidCompressor(): void
@@ -61,5 +58,4 @@ class ProcessorTest extends TestCase
         $processor = new Processor();
         $processor->setCompressor(new InvalidCompressor());
     }
-
-} 
+}

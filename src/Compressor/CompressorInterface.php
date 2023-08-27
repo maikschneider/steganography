@@ -6,7 +6,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 interface CompressorInterface
 {
-
     public function compress(string $data): mixed;
 
     public function decompress(mixed $data): string;
@@ -16,5 +15,4 @@ interface CompressorInterface
     public function isSupported(): bool;
 
     public function getName(): string;
-
-} 
+}

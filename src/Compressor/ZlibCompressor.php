@@ -6,10 +6,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ZlibCompressor extends Compressor
 {
-
     public function compress($data): string|bool
     {
-        return gzcompress((string) $data, $this->options['level']);
+        return gzcompress((string)$data, $this->options['level']);
     }
 
     public function decompress($data): string
@@ -33,5 +32,4 @@ class ZlibCompressor extends Compressor
     {
         return 'zlib';
     }
-
 }

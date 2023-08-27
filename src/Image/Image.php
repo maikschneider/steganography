@@ -4,16 +4,15 @@ namespace MaikSchneider\Steganography\Image;
 
 use GdImage;
 use InvalidArgumentException;
-use MultipleIterator;
 use LimitIterator;
-use RuntimeException;
 use MaikSchneider\Steganography\Iterator\BinaryIterator;
 use MaikSchneider\Steganography\Iterator\RectIterator;
 use MaikSchneider\Steganography\Processor;
+use MultipleIterator;
+use RuntimeException;
 
 final class Image
 {
-
     private string $path;
 
     private GdImage|bool|null $image = null;
@@ -67,10 +66,10 @@ final class Image
             case IMAGETYPE_JPEG:
                 $this->image = imagecreatefromjpeg($this->path);
                 break;
-            case IMAGETYPE_GIF;
+            case IMAGETYPE_GIF:
                 $this->image = imagecreatefromgif($this->path);
                 break;
-            case IMAGETYPE_PNG;
+            case IMAGETYPE_PNG:
                 $this->image = imagecreatefrompng($this->path);
                 break;
             default:
@@ -199,5 +198,4 @@ final class Image
 
         return ob_get_clean();
     }
-
-} 
+}

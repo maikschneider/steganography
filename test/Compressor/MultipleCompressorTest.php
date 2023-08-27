@@ -10,22 +10,21 @@ use PHPUnit\Framework\TestCase;
 
 class MultipleCompressorTest extends TestCase
 {
-
     public function testName(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->attach(new ZlibCompressor());
-        $this->assertEquals('multiple', $compressor->getName());
+        self::assertEquals('multiple', $compressor->getName());
     }
 
     public function testIsSupported(): void
     {
         $compressor = new MultipleCompressor();
         $compressor->attach(new ZlibCompressor());
-        $this->assertTrue($compressor->isSupported());
+        self::assertTrue($compressor->isSupported());
 
         $compressor = new MultipleCompressor();
-        $this->assertFalse($compressor->isSupported());
+        self::assertFalse($compressor->isSupported());
     }
 
     public function testEncodeAndDecode(): void
@@ -35,7 +34,7 @@ class MultipleCompressorTest extends TestCase
 
         $compressed = $compressor->compress('test');
 
-        $this->assertEquals('test', $compressor->decompress($compressed));
+        self::assertEquals('test', $compressor->decompress($compressed));
     }
 
     public function testEncodeBeforeAttach(): void
@@ -60,7 +59,7 @@ class MultipleCompressorTest extends TestCase
         $compressor->attach(new ZlibCompressor());
         $data = $compressor->compress('test');
 
-        $this->assertEquals('test', $compressor->decompress($data));
+        self::assertEquals('test', $compressor->decompress($data));
     }
 
     public function testInvalidPreferredChoice(): void
@@ -71,7 +70,6 @@ class MultipleCompressorTest extends TestCase
         $compressor->compress('test');
         $data = $compressor->compress('test');
 
-        $this->assertEquals('test', $compressor->decompress($data));
+        self::assertEquals('test', $compressor->decompress($data));
     }
-
-} 
+}

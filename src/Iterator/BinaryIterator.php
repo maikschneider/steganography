@@ -10,7 +10,6 @@ use MaikSchneider\Steganography\Processor;
  */
 class BinaryIterator implements Iterator
 {
-
     private readonly string $string;
 
     private int $index = 0;
@@ -64,7 +63,7 @@ class BinaryIterator implements Iterator
     /**
      * Checks if current position is valid
      *
-     * @return boolean The return value will be casted to boolean and then evaluated.
+     * @return bool The return value will be casted to boolean and then evaluated.
      *       Returns true on success or false on failure.
      */
     public function valid(): bool
@@ -74,12 +73,9 @@ class BinaryIterator implements Iterator
 
     /**
      * Rewind the Iterator to the first element
-     *
-     * @return void Any returned value is ignored.
      */
     public function rewind(): void
     {
         $this->index = 0;
     }
-
 }

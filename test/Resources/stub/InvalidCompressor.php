@@ -7,7 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InvalidCompressor extends Compressor
 {
-
     public function compress(string $data): mixed
     {
         return $data;
@@ -31,5 +30,4 @@ class InvalidCompressor extends Compressor
     {
         return 'invalid';
     }
-
 }

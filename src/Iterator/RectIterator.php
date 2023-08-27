@@ -3,12 +3,12 @@
 namespace MaikSchneider\Steganography\Iterator;
 
 use Iterator;
+
 /**
  * @author Kazuyuki Hayashi
  */
 class RectIterator implements Iterator
 {
-
     /**
      * @var int
      */
@@ -47,8 +47,6 @@ class RectIterator implements Iterator
 
     /**
      * Move forward to next element
-     *
-     * @return void Any returned value is ignored.
      */
     public function next(): void
     {
@@ -75,7 +73,7 @@ class RectIterator implements Iterator
     /**
      * Checks if current position is valid
      *
-     * @return boolean The return value will be casted to boolean and then evaluated.
+     * @return bool The return value will be casted to boolean and then evaluated.
      *       Returns true on success or false on failure.
      */
     public function valid(): bool
@@ -85,8 +83,6 @@ class RectIterator implements Iterator
 
     /**
      * Rewind the Iterator to the first element
-     *
-     * @return void Any returned value is ignored.
      */
     public function rewind(): void
     {
@@ -94,5 +90,4 @@ class RectIterator implements Iterator
         $this->x     = 0;
         $this->y     = 0;
     }
-
 }
