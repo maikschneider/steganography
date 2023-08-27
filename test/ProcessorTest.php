@@ -4,8 +4,10 @@ namespace MaikSchneider\Steganography\Test;
 
 namespace MaikSchneider\Steganography\Test;
 
+use MaikSchneider\Steganography\Compressor\CompressorInterface;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
-use MaikSchneider\Steganography\Image;
+use MaikSchneider\Steganography\Encoder\DefaultEncoder;
+use MaikSchneider\Steganography\Encoder\EncoderInterface;
 use MaikSchneider\Steganography\Processor;
 use MaikSchneider\Steganography\Test\Resources\stub\InvalidCompressor;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +19,7 @@ class ProcessorTest extends TestCase
     {
         $processor = new Processor();
         $processor->setCompressor(new ZlibCompressor());
-        $this->assertInstanceOf(\MaikSchneider\Steganography\CompressorInterface::class, $processor->getCompressor());
+        $this->assertInstanceOf(CompressorInterface::class, $processor->getCompressor());
     }
 
     public function testEncode()
@@ -47,9 +49,9 @@ class ProcessorTest extends TestCase
     public function testEncoder(): void
     {
         $processor = new Processor();
-        $processor->setEncoder(new \MaikSchneider\Steganography\Encoder\DefaultEncoder());
+        $processor->setEncoder(new DefaultEncoder());
 
-        $this->assertInstanceOf(\MaikSchneider\Steganography\EncoderInterface::class, $processor->getEncoder());
+        $this->assertInstanceOf(EncoderInterface::class, $processor->getEncoder());
     }
 
     public function testInvalidCompressor(): void

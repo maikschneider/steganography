@@ -2,14 +2,13 @@
 
 namespace MaikSchneider\Steganography\Encoder;
 
-use MaikSchneider\Steganography\CompressorInterface;
-use MaikSchneider\Steganography\EncoderInterface;
+use MaikSchneider\Steganography\Compressor\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DefaultEncoder implements EncoderInterface
 {
 
-    public function encode($data, CompressorInterface $compressor, array $options = []): mixed
+    public function encode($data, CompressorInterface $compressor, array $options = []): string
     {
         $compressed = base64_encode((string) $compressor->compress($data));
         $bin        = '';

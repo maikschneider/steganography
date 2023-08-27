@@ -1,7 +1,8 @@
 <?php
 
-namespace MaikSchneider\Steganography;
+namespace MaikSchneider\Steganography\Encoder;
 
+use MaikSchneider\Steganography\Compressor\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 interface EncoderInterface

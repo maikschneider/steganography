@@ -2,7 +2,6 @@
 
 namespace MaikSchneider\Steganography\Compressor;
 
-use MaikSchneider\Steganography\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class Compressor implements CompressorInterface

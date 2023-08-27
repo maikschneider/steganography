@@ -3,6 +3,8 @@
 namespace MaikSchneider\Steganography;
 
 use LogicException;
+use MaikSchneider\Steganography\Compressor\CompressorInterface;
+use MaikSchneider\Steganography\Encoder\EncoderInterface;
 use RuntimeException;
 use MaikSchneider\Steganography\Compressor\ZlibCompressor;
 use MaikSchneider\Steganography\Encoder\DefaultEncoder;

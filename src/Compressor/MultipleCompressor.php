@@ -3,7 +3,6 @@
 namespace MaikSchneider\Steganography\Compressor;
 
 use LogicException;
-use MaikSchneider\Steganography\CompressorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MultipleCompressor extends Compressor
