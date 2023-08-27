@@ -62,19 +62,12 @@ final class Image
         $this->pixels = $this->width * $this->height;
         $type = $info[2];
 
-        switch ($type) {
-            case IMAGETYPE_JPEG:
-                $this->image = imagecreatefromjpeg($this->path);
-                break;
-            case IMAGETYPE_GIF:
-                $this->image = imagecreatefromgif($this->path);
-                break;
-            case IMAGETYPE_PNG:
-                $this->image = imagecreatefrompng($this->path);
-                break;
-            default:
-                throw new RuntimeException('Unsupport image type ' . $type);
-        }
+        $this->image = match ($type) {
+            IMAGETYPE_JPEG => imagecreatefromjpeg($this->path),
+            IMAGETYPE_GIF => imagecreatefromgif($this->path),
+            IMAGETYPE_PNG => imagecreatefrompng($this->path),
+            default => throw new RuntimeException('Unsupported image type ' . $type),
+        };
 
         imagealphablending($this->image, false);
     }
@@ -191,7 +184,7 @@ final class Image
         }
     }
 
-    public function get()
+    public function get(): bool|string
     {
         ob_start();
         imagepng($this->image);

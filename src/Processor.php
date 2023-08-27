@@ -68,7 +68,7 @@ class Processor
 
     public function decode(string $file, array $options = []): mixed
     {
-        $image = new Image($file);
+        $image = Image::getFromFilePath($file);
         $binary = $image->getBinaryString();
 
         return $this->decodeMessage($binary, $options);

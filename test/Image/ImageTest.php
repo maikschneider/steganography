@@ -10,7 +10,7 @@ class ImageTest extends TestCase
 {
     public function testSize(): void
     {
-        $image = new Image(__DIR__ . '/../Resources/img/3.jpg');
+        $image = Image::getFromFilePath(__DIR__ . '/../Resources/img/3.jpg');
         self::assertEquals(3, $image->getWidth());
         self::assertEquals(3, $image->getHeight());
     }
@@ -18,6 +18,6 @@ class ImageTest extends TestCase
     public function testInvalidPath(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new Image(__DIR__ . '/foo.jpg');
+        Image::getFromFilePath(__DIR__ . '/foo.jpg');
     }
 }
