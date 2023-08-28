@@ -54,11 +54,16 @@ class MultipleCompressorTest extends TestCase
 
     public function testPreferredChoice(): void
     {
-        $compressor = new MultipleCompressor();
+        $compressor = new MultipleCompressor(['preferred_choice' => 'zlib']);
         $compressor->attach(new InvalidCompressor());
         $compressor->attach(new ZlibCompressor());
         $data = $compressor->compress('test');
+        self::assertEquals('test', $compressor->decompress($data));
 
+        $compressor = new MultipleCompressor();
+        $compressor->attach(new ZlibCompressor());
+        $compressor->attach(new InvalidCompressor());
+        $data = $compressor->compress('test');
         self::assertEquals('test', $compressor->decompress($data));
     }
 

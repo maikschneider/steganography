@@ -29,7 +29,7 @@ final class Image
     public static function getFromFilePath(string $path): Image
     {
         if (!file_exists($path)) {
-            throw new InvalidArgumentException('File Not Found: ' . $path);
+            throw new InvalidArgumentException('File Not Found: ' . $path, 1693212643);
         }
 
         $image = new Image();
