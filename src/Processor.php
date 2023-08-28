@@ -66,9 +66,15 @@ class Processor
         return $this->encoder->encode($message, $this->compressor, $options);
     }
 
-    public function decode(string $file, array $options = []): mixed
+    public function decode(mixed $file, array $options = []): mixed
     {
-        $image = Image::getFromFilePath($file);
+        if (is_string($file)) {
+            $image = Image::getFromFilePath($file);
+        } elseif (is_object($file) && get_class($file) === GdImage::class) {
+            $image = Image::getFromResource($file);
+        } else {
+            throw new \InvalidArgumentException('Type of argument "file" not supported. Musst be path or resource.');
+        }
         $binary = $image->getBinaryString();
 
         return $this->decodeMessage($binary, $options);
