@@ -37,19 +37,17 @@ class Processor
      */
     public function encode(GdImage|string $file, string $message, array $options = []): Image
     {
-        if (is_string($file)) {
-            $image = Image::getFromFilePath($file);
-        } elseif (is_object($file) && get_class($file) === GdImage::class) {
+        if ((is_object($file) && get_class($file) === GdImage::class)) {
             $image = Image::getFromResource($file);
         } else {
-            throw new \InvalidArgumentException('Type of argument "file" not supported. Musst be path or resource.');
+            $image = Image::getFromFilePath($file);
         }
 
         $message = $this->encodeMessage($message, $options);
         $pixels = ceil(strlen((string)$message) / self::BITS_PER_PIXEL + (self::LENGTH_BITS / self::BITS_PER_PIXEL));
 
         if ($pixels > $image->getPixels()) {
-            throw new LogicException('Number of pixels is fewer than ' . $pixels);
+            throw new LogicException('Number of pixels is fewer than needed ' . $pixels . ' pixels', 1693212326);
         }
 
         $image->setBinaryString(new BinaryIterator($message));
@@ -68,13 +66,12 @@ class Processor
 
     public function decode(mixed $file, array $options = []): mixed
     {
-        if (is_string($file)) {
-            $image = Image::getFromFilePath($file);
-        } elseif (is_object($file) && get_class($file) === GdImage::class) {
+        if (is_object($file) && get_class($file) === GdImage::class) {
             $image = Image::getFromResource($file);
         } else {
-            throw new \InvalidArgumentException('Type of argument "file" not supported. Musst be path or resource.');
+            $image = Image::getFromFilePath($file);
         }
+
         $binary = $image->getBinaryString();
 
         return $this->decodeMessage($binary, $options);
