@@ -1,5 +1,5 @@
 .idea/
-build
+.build/
 /vendor/
 /test/Resources/out/*
 .phpunit*

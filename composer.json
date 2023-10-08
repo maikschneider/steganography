@@ -32,8 +32,8 @@
         }
     },
     "scripts": {
-        "test:phpunit": "vendor/bin/phpunit -c phpunit.xml.dist --coverage-text",
-        "test:coverage": "vendor/bin/coveralls",
+        "test:phpunit": "vendor/bin/phpunit -c phpunit.xml --no-coverage",
+        "test:coverage": "vendor/bin/phpunit -c phpunit.xml",
         "php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix"
     }
 }
