@@ -2,6 +2,7 @@ Steganography
 =============
 
 [![Latest Version](https://poser.pugx.org/maikschneider/steganography/v/stable)](https://packagist.org/packages/maikschneider/steganography)
+[![codecov](https://codecov.io/gh/maikschneider/steganography/graph/badge.svg?token=C5SFRHREK1)](https://codecov.io/gh/maikschneider/steganography)
 
 Simple PHP implementation of Steganography (Hiding a hidden message within an image)
 
