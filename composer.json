@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.0",
-        "phpunit/phpunit": "^10.3",
+        "phpunit/phpunit": "^11.0",
         "rector/rector": "^1.0.0",
         "friendsofphp/php-cs-fixer": "^3.12"
     },
